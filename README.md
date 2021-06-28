@@ -11,3 +11,5 @@
 # Mockgen
   
   mockgen -source=./domain/article.go -destination=./integration_test/mocks_test.go -package=integration_test
+  go test -coverprofile=coverage.out
+  go tool cover -html=coverage.out
