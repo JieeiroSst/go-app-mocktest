@@ -18,6 +18,7 @@ import (
 func AuthorById(t *testing.T){
 	req, err := http.NewRequest(echo.GET, fmt.Sprintf("http://localhost:1234/author/%d",id), nil)
 	assert.NoError(t, err)
+	req.Header.Set("Content-Type", "application/json")
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	assert.NoError(t, err)
@@ -38,8 +39,7 @@ func AuthorById(t *testing.T){
 func AuthorByAll(t *testing.T){
 	req, err := http.NewRequest(echo.GET, "http://localhost:1234/author/", nil)
 	assert.NoError(t, err)
-
-	fmt.Println(req)
+	req.Header.Set("Content-Type", "application/json")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
@@ -55,7 +55,6 @@ func AuthorByAll(t *testing.T){
 			Name: "chmp",
 		},
 	}
-
 	jsonData, _ := json.Marshal(authors)
 	assert.Equal(t, string(jsonData)+"\n", string(bodys))
 }
@@ -93,7 +92,7 @@ func UpdateAuthor(t *testing.T) {
 func DeleteAuthor(t *testing.T) {
 	req, err := http.NewRequest(echo.DELETE,fmt.Sprintf("http://localhost:1234/author/%d",id), nil)
 	assert.NoError(t, err)
-
+	req.Header.Set("Content-Type", "application/json")
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	assert.NoError(t, err)
@@ -151,6 +150,7 @@ func DeleteArticle(t *testing.T) {
 func ArticleAll(t *testing.T) {
 	req, err := http.NewRequest(echo.GET, "http://localhost:1234/article/", nil)
 	assert.NoError(t, err)
+	req.Header.Set("Content-Type", "application/json")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
@@ -180,6 +180,7 @@ func ArticleAll(t *testing.T) {
 func ArticleById(t *testing.T){
 	req, err := http.NewRequest(echo.GET, fmt.Sprintf("http://localhost:1234/article/%d",id), nil)
 	assert.NoError(t, err)
+	req.Header.Set("Content-Type", "application/json")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
@@ -199,7 +200,6 @@ func ArticleById(t *testing.T){
 			Name:"chmp",
 		},
 	}
-
 	jsonData, _ := json.Marshal(Article)
 	assert.Equal(t, string(jsonData)+"\n", string(bodys))
 }
