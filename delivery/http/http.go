@@ -27,7 +27,7 @@ var (
 type Handler struct{
 	repo domain.Repository
 }
-//mockgen -source=api.go -destination=./integration_test/mocks_test.go -package=integration_test
+
 func NewHandler(e *echo.Echo,handler domain.Repository) {
 	h:=Handler{
 		repo: handler,
@@ -80,7 +80,7 @@ func (h *Handler) ArticleById(e echo.Context) error {
 		log.Printf(empty+"%s",err)
 		return e.String(http.StatusInternalServerError,empty)
 	}
-	log.Printf(find_all)
+	log.Printf(find_by_id)
 	return e.JSON(http.StatusOK,article)
 }
 

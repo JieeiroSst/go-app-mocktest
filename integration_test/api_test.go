@@ -32,8 +32,6 @@ func AuthorById(t *testing.T){
 	}
 
 	jsonData, _ := json.Marshal(author)
-	fmt.Println(string(bodys))
-	fmt.Println( string(jsonData)+"\n")
 	assert.Equal(t, string(jsonData)+"\n", string(bodys))
 }
 
@@ -59,8 +57,6 @@ func AuthorByAll(t *testing.T){
 	}
 
 	jsonData, _ := json.Marshal(authors)
-	fmt.Println(string(bodys))
-	fmt.Println( string(jsonData)+"\n")
 	assert.Equal(t, string(jsonData)+"\n", string(bodys))
 }
 
@@ -101,10 +97,8 @@ func DeleteAuthor(t *testing.T) {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	assert.NoError(t, err)
-
 	bodys, err := ioutil.ReadAll(resp.Body)
 	assert.NoError(t, err)
-
 	assert.Equal(t,delete_message, string(bodys))
 }
 
@@ -115,7 +109,6 @@ func CreateArticle(t *testing.T) {
 	data.Set("title","chmp")
 	data.Set("body","chmp")
 	data.Set("author_id","1")
-
 
 	client := &http.Client{}
 	r, _ := http.NewRequest("POST", endpoint, strings.NewReader(data.Encode()))
@@ -152,15 +145,12 @@ func DeleteArticle(t *testing.T) {
 
 	bodys, err := ioutil.ReadAll(resp.Body)
 	assert.NoError(t, err)
-
 	assert.Equal(t,delete_message, string(bodys))
 }
 
 func ArticleAll(t *testing.T) {
 	req, err := http.NewRequest(echo.GET, "http://localhost:1234/article/", nil)
 	assert.NoError(t, err)
-
-	fmt.Println(req)
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
@@ -184,16 +174,12 @@ func ArticleAll(t *testing.T) {
 	}
 
 	jsonData, _ := json.Marshal(listArticle)
-	fmt.Println(string(bodys))
-	fmt.Println( string(jsonData)+"\n")
 	assert.Equal(t, string(jsonData)+"\n", string(bodys))
 }
 
 func ArticleById(t *testing.T){
 	req, err := http.NewRequest(echo.GET, fmt.Sprintf("http://localhost:1234/article/%d",id), nil)
 	assert.NoError(t, err)
-
-	fmt.Println(req)
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
@@ -215,7 +201,5 @@ func ArticleById(t *testing.T){
 	}
 
 	jsonData, _ := json.Marshal(Article)
-	fmt.Println(string(bodys))
-	fmt.Println( string(jsonData)+"\n")
 	assert.Equal(t, string(jsonData)+"\n", string(bodys))
 }
